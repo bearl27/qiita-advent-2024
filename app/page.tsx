@@ -1,7 +1,6 @@
-'use client'
+"use client"
 
-import { type FC } from 'react'
-import { useState } from 'react'
+import { useState } from "react"
 import { Star, TreesIcon as Tree, Gift } from 'lucide-react'
 
 interface QiitaArticle {
@@ -10,8 +9,8 @@ interface QiitaArticle {
   created_at: string;
 }
 
-const AdventCalendar: FC = () => {
-  const [qiitaId, setQiitaId] = useState<string>('')
+export default function AdventCalendar() {
+  const [qiitaId, setQiitaId] = useState<string>("")
   const [articles, setArticles] = useState<QiitaArticle[]>([])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,12 +21,10 @@ const AdventCalendar: FC = () => {
       const data = await response.json()
       const decemberArticles = data.filter((article: QiitaArticle) => {
         const date = new Date(article.created_at)
-        return (
-          date.getFullYear() === 2024 &&
-          date.getMonth() === 11 &&
-          date.getDate() >= 1 &&
-          date.getDate() <= 25
-        )
+        return date.getFullYear() === 2024 &&
+              date.getMonth() === 11 &&
+              date.getDate() >= 1 &&
+              date.getDate() <= 25
       })
       setArticles(decemberArticles)
     } catch (error) {
@@ -37,7 +34,7 @@ const AdventCalendar: FC = () => {
   }
 
   const getArticleForDay = (day: number) => {
-    return articles.find((article) => {
+    return articles.find(article => {
       const date = new Date(article.created_at)
       return date.getDate() === day
     })
@@ -85,7 +82,7 @@ const AdventCalendar: FC = () => {
           ))}
         </div>
 
-        <div className="w-0 h-0 border-l-[150px] border-r-[150px] border-b-[100px] border-l-transparent border-r-transparent border-b-green-800 mx-auto mb-4" />
+        <div className="w-0 h-0 border-l-[150px] border-r-[150px] border-b-[100px] border-l-transparent border-r-transparent border-b-green-800 mx-auto mb-4"></div>
 
         <div className="relative bg-green-800 p-4 rounded-lg">
           {houseStructure.map((row, rowIndex) => (
@@ -98,7 +95,10 @@ const AdventCalendar: FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     key={number}
-                    className="w-12 h-12 m-1 rounded-lg flex items-center justify-center text-lg font-bold transition-colors duration-300 bg-red-500 hover:bg-red-600 text-white shadow-md"
+                    className={`
+                      w-12 h-12 m-1 rounded-lg flex items-center justify-center text-lg font-bold
+                      transition-colors duration-300 bg-red-500 hover:bg-red-600 text-white shadow-md"
+                    `}
                     title={article.title}
                   >
                     {number === 25 ? (
@@ -132,24 +132,23 @@ const AdventCalendar: FC = () => {
             </div>
           ))}
 
-          <div className="absolute -bottom-22 left-1/2 transform -translate-x-1/2 w-16 h-24 bg-yellow-800" />
+        <div className="absolute -bottom-22 left-1/2 transform -translate-x-1/2 w-16 h-24 bg-yellow-800"></div>
         </div>
 
         <div className="absolute top-1/4 left-8 w-12 h-12 bg-yellow-300 rounded-lg grid grid-cols-2 gap-1 p-1">
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
         </div>
         <div className="absolute top-1/4 right-8 w-12 h-12 bg-yellow-300 rounded-lg grid grid-cols-2 gap-1 p-1">
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
-          <div className="bg-blue-500" />
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
+          <div className="bg-blue-500"></div>
         </div>
       </div>
     </div>
   )
 }
 
-export default AdventCalendar
